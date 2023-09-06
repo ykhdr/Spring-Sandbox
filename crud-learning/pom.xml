@@ -66,6 +66,7 @@
       <artifactId>lombok</artifactId>
       <version>1.18.28</version>
       <scope>provided</scope>
+
     </dependency>
     <dependency>
       <groupId>org.jetbrains</groupId>
@@ -73,7 +74,12 @@
       <version>24.0.0</version>
       <scope>compile</scope>
     </dependency>
-
+    <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
+    <dependency>
+      <groupId>org.hibernate.validator</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <version>8.0.1.Final</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -92,6 +98,15 @@
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
+          <configuration>
+            <source>${maven.compiler.source}</source>
+            <target>${maven.compiler.source}</target>
+            <encoding>${project.build.sourceEncoding}</encoding>
+            <!--<compilerArgument>-proc:none</compilerArgument>-->
+            <annotationProcessors>
+              <annotationProcessor>lombok.launch.AnnotationProcessorHider$AnnotationProcessor</annotationProcessor>
+            </annotationProcessors>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
