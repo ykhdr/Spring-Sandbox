@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<body>
+Hello!
+
+<a href="/first/goodbye">Say goodbye!</a> or <a href="/exit">Exit</a>
+or <a href="/first/hello?surname=Jone&name=name">Request with params</a>
+
+
+<p th:text="${message}"></p>
+<form action="http://localhost:8080/first/calculator">
+    <p><input type="number" name="a">First number</p>
+    <p><input type="number" name="b">Second number</p>
+    <p><input type="text" name="action">Action</p>
+    <p><input type="submit"></p>
+</form>
+</body>
+</html>
