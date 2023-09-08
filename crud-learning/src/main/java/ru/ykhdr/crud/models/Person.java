@@ -6,9 +6,11 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.springframework.validation.annotation.Validated;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Setter
 @Getter
 public class Person {
@@ -18,7 +20,7 @@ public class Person {
     @Size(min = 2, max = 30, message = "Name shoud be between 2 and 30 chars")
     private String name;
 
-    @Min(value = 0,message = "Age should be greater than zero")
+    @Min(value = 0, message = "Age should be greater than zero")
     private int age;
 
     @NotEmpty(message = "Email should not be empty")
