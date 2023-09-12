@@ -1,12 +1,9 @@
 package ru.ykhdr.crud.models;
 
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import lombok.*;
-import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,4 +23,9 @@ public class Person {
     @NotEmpty(message = "Email should not be empty")
     @Email(message = "Email should be valid")
     private String email;
+
+    // Страна, Город, Индекс (6 цифр) - регулярное выражение
+    @Pattern(regexp = "[A-Z]\\w+, [A-Z]\\w+, \\d{6}",
+            message = "Your address should be in this format: Country, City, Postal Code (6 digits)")
+    private String address;
 }
