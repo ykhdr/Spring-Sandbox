@@ -9,18 +9,18 @@
 <form action="#" th:method="POST" th:action="@{/people}" th:object="${person}">
     <label for="name"></label>
     <input type="text" th:field="*{name}" id="name">
-    <td style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</td>
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
     <br/>
     <label for="age"></label>
     <input type="number" th:field="*{age}" id="age">
-    <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Name error</div>
+    <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{getAge()}">Name error</div>
     <br/>
     <label for="email"></label>
     <input type="text" th:field="*{email}" id="email">
     <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name error</div>
     <br/>
     <label for="address"></label>
-    <input type="text" th:field="*{email}" id="address">
+    <input type="text" th:field="*{address}" id="address">
     <div style="color:red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Name error</div>
     <br/>
     <input type="submit" value="Create!">
