@@ -6,7 +6,9 @@
 </head>
 <body>
 
-hi
+<div th:each="person : ${people}">
+    <a th:text="${person.getName()} ${person.getSurname()}, ${person.getBirthYear()}" >user</a>
+</div>
 
 </body>
 </html>

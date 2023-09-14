@@ -18,7 +18,7 @@ public class PeopleController {
     public String index(@NotNull Model model){
         model.addAttribute("people", personDao.index());
 
-        return "index";
+        return "people/index";
     }
 
 
