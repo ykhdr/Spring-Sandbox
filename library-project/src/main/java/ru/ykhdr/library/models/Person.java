@@ -25,6 +25,7 @@ public class Person {
     @Size(min = 2, max = 100, message = ValidationErrorMessage.FIELD_LENGTH_BETWEEN_2_AND_100)
     private String surname;
 
+    @Size(min = 2, max = 100, message = ValidationErrorMessage.FIELD_LENGTH_BETWEEN_2_AND_100)
     private String fatherName;
 
     @NotEmpty(message = ValidationErrorMessage.FIELD_NOT_EMPTY)
@@ -33,5 +34,6 @@ public class Person {
 
     @NotEmpty(message = ValidationErrorMessage.FIELD_NOT_EMPTY)
     @Email(message = ValidationErrorMessage.FIELD_VALID)
+    @Size(min = 2, max = 100, message =  ValidationErrorMessage.FIELD_LENGTH_BETWEEN_2_AND_100)
     private String email;
 }
