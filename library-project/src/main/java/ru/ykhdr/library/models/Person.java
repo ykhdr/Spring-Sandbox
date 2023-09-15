@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 import ru.ykhdr.library.message.ValidationErrorMessage;
@@ -12,6 +13,7 @@ import ru.ykhdr.library.message.ValidationErrorMessage;
 import java.util.Date;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Setter
 @Getter
 public class Person {
@@ -30,7 +32,7 @@ public class Person {
 
     @NotEmpty(message = ValidationErrorMessage.FIELD_NOT_EMPTY)
     @DateTimeFormat(pattern = "dd.MM.yyyy")
-    private Date birthYear;
+    private Date birthday;
 
     @NotEmpty(message = ValidationErrorMessage.FIELD_NOT_EMPTY)
     @Email(message = ValidationErrorMessage.FIELD_VALID)
