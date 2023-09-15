@@ -10,8 +10,6 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 import ru.ykhdr.library.message.ValidationErrorMessage;
 
-import java.util.Date;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -31,5 +29,5 @@ public class Book {
 
     @NotEmpty(message = ValidationErrorMessage.FIELD_NOT_EMPTY)
     @DateTimeFormat(pattern = "dd.MM.yyyy")
-    private Date releaseYear;
+    private int releaseYear;
 }
