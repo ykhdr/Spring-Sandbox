@@ -7,10 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 import ru.ykhdr.library.message.ValidationErrorMessage;
-
-import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,8 +28,8 @@ public class Person {
     private String fatherName;
 
     @NotEmpty(message = ValidationErrorMessage.FIELD_NOT_EMPTY)
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
-    private Date birthday;
+    @Size(min = 1800, max = 2023, message = ValidationErrorMessage.FIELD_VALID)
+    private int birthdayYear;
 
     @NotEmpty(message = ValidationErrorMessage.FIELD_NOT_EMPTY)
     @Email(message = ValidationErrorMessage.FIELD_VALID)
