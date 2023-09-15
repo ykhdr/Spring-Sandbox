@@ -15,11 +15,11 @@ public class BookDao {
     private final JdbcTemplate jdbcTemplate;
 
     public List<Book> index() {
-        return jdbcTemplate.query("SELECT * FROM book", new BeanPropertyRowMapper<>(Book.class));
+        return jdbcTemplate.query("SELECT * FROM Book", new BeanPropertyRowMapper<>(Book.class));
     }
 
     public void save(@NotNull Book book) {
-        jdbcTemplate.update("INSERT INTO book(name,author,release_year) VALUES (?,?,?)",
+        jdbcTemplate.update("INSERT INTO Book(name,author,release_year) VALUES (?,?,?)",
                 book.getName(), book.getAuthor(), book.getReleaseYear());
     }
 }
