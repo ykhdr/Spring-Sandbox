@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ru.ykhdr.library.dao.BookDao;
 import ru.ykhdr.library.dao.PersonDao;
 import ru.ykhdr.library.models.Person;
 
@@ -15,6 +16,7 @@ import ru.ykhdr.library.models.Person;
 @RequestMapping("/people")
 public class PeopleController {
     private final PersonDao personDao;
+    private final BookDao bookDao;
 
     @GetMapping()
     public String index(@NotNull Model model) {
@@ -41,7 +43,7 @@ public class PeopleController {
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
         model.addAttribute("person", personDao.show(id).orElse(null));
-
+        model.addAttribute("books", bookDao.booksByHolder(id));
         return "people/show";
     }
 

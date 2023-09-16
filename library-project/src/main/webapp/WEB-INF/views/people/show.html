@@ -12,6 +12,18 @@
     <p th:text="${person.getEmail()}">EMAIL</p>
     <p th:text="${person.getBirthdayYear()}">BIRTHDAY YEAR</p>
 
+    <th:block th:if="${books.isEmpty()}">
+        <p>Person haven't books now</p>
+    </th:block>
+
+    <th:block th:unless="${books.isEmpty()}">
+        <ul>
+            <li th:each="book : ${books}">
+                <span th:text="${book.getName() + ', ' + book.getAuthor()}"></span>
+            </li>
+        </ul>
+    </th:block>
+
     <a th:href="@{/people/{id}/edit(id=${person.getId()})}">edit</a>
 
     <form th:method="DELETE" th:action="@{/people/{id}(id=${person.getId()})}">
