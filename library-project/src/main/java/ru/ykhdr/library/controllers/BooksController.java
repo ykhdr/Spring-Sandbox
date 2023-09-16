@@ -28,13 +28,43 @@ public class BooksController {
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
+    public String create(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             return "books/new";
         }
 
         bookDao.save(book);
 
         return "redirect:/books";
+    }
+
+    @GetMapping("/{id}")
+    public String show(@PathVariable("id") int id, Model model) {
+        model.addAttribute("book", bookDao.show(id).orElse(null));
+
+        return "/books/show";
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") int id) {
+        bookDao.delete(id);
+        return "redirect:/books";
+    }
+
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("book") @Valid Book book, @PathVariable("id") int id, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "/books/edit";
+        }
+
+        bookDao.update(id,book);
+
+        return "redirect:/books";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable("id") int id, Model model){
+        model.addAttribute("book", bookDao.show(id));
+        return "/books/edit";
     }
 }
