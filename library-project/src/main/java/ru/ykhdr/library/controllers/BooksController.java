@@ -13,7 +13,7 @@ import ru.ykhdr.library.models.Book;
 @AllArgsConstructor
 @Controller
 @RequestMapping("/books")
-public class BookController {
+public class BooksController {
     private final BookDao bookDao;
 
     @GetMapping()
