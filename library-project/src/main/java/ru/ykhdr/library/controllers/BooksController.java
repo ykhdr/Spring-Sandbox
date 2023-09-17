@@ -8,13 +8,16 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.ykhdr.library.dao.BookDao;
+import ru.ykhdr.library.dao.PersonDao;
 import ru.ykhdr.library.models.Book;
+import ru.ykhdr.library.models.Person;
 
 @AllArgsConstructor
 @Controller
 @RequestMapping("/books")
 public class BooksController {
     private final BookDao bookDao;
+    private final PersonDao personDao;
 
     @GetMapping()
     public String index(@NotNull Model model) {
@@ -40,7 +43,16 @@ public class BooksController {
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("book", bookDao.show(id).orElse(null));
+        Book book = bookDao.show(id).orElse(null);
+
+        if(book == null){
+            return "/books/show";
+        }
+
+        Person person = book.getHolderId() == 0 ? null : personDao.show(book.getHolderId()).orElse(null);
+
+        model.addAttribute("book", book);
+        model.addAttribute("person", person);
 
         return "/books/show";
     }
@@ -67,4 +79,7 @@ public class BooksController {
         model.addAttribute("book", bookDao.show(id));
         return "/books/edit";
     }
+
+
+
 }

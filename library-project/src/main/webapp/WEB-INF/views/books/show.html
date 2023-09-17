@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
     <title>Book</title>
 </head>
 <body>
@@ -11,6 +11,15 @@
     <p th:text="${book.getReleaseYear()}">RELEASE YEAR</p>
 
     <a th:href="@{/books/{id}/edit(id=${book.getId()})}">edit</a>
+
+
+    <th:block th:if="${person == null}">
+        <p>Book is available</p>
+    </th:block>
+
+    <th:block th:unless="${person == null}">
+        <p th:text="${'Book holding by' + person.getName() + ' ' + person.getSurname()}"></p>
+    </th:block>
 
     <form th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}">
         <input type="submit" value="delete"/>
