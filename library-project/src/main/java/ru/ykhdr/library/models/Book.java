@@ -21,7 +21,7 @@ public class Book {
 
     @NotEmpty(message = ValidationErrorMessage.FIELD_NOT_EMPTY)
     @Size(min = 2, max = 100, message = ValidationErrorMessage.FIELD_LENGTH_BETWEEN_2_AND_100)
-    private String name;
+    private String title;
 
     @NotEmpty(message = ValidationErrorMessage.FIELD_NOT_EMPTY)
     @Size(min = 2, max = 100, message = ValidationErrorMessage.FIELD_LENGTH_BETWEEN_2_AND_100)

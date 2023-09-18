@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <title>Booking</title>
+</head>
+<body>
+
+<div th:each="info : ${bookPersonInfo}">
+    <p th:text="${info.getBookTitle() + ' : ' + info.getPersonName()}"></p>
+</div>
+
+</body>
+</html>

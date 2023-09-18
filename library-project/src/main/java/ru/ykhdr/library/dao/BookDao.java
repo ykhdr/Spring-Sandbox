@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ru.ykhdr.library.models.Book;
+import ru.ykhdr.library.models.BookPersonInfo;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,8 +21,8 @@ public class BookDao {
     }
 
     public void save(@NotNull Book book) {
-        jdbcTemplate.update("INSERT INTO Book(name,author,release_year) VALUES (?,?,?)",
-                book.getName(), book.getAuthor(), book.getReleaseYear());
+        jdbcTemplate.update("INSERT INTO Book(title,author,release_year) VALUES (?,?,?)",
+                book.getTitle(), book.getAuthor(), book.getReleaseYear());
     }
 
     public Optional<Book> show(int id) {
@@ -34,8 +35,8 @@ public class BookDao {
     }
 
     public void update(int id, Book book) {
-        jdbcTemplate.update("UPDATE Book SET name=?,author=?,release_year=? WHERE id = ?",
-                book.getName(), book.getAuthor(), book.getReleaseYear(), id);
+        jdbcTemplate.update("UPDATE Book SET title=?,author=?,release_year=? WHERE id = ?",
+                book.getTitle(), book.getAuthor(), book.getReleaseYear(), id);
     }
 
     public List<Book> booksByHolder(int holderId) {
@@ -43,6 +44,14 @@ public class BookDao {
     }
 
     public void addHolder(int bookId, int holderId) {
-        jdbcTemplate.update("UPDATE book SET holder_id = ? WHERE book_id = ?", holderId, bookId);
+        jdbcTemplate.update("UPDATE book SET holder_id = ? WHERE id = ?", holderId, bookId);
+    }
+
+    public List<BookPersonInfo> booksNamesWithHoldersNames(){
+        return jdbcTemplate.query("SELECT Book.title, Person.name FROM Book JOIN Person ON book.holder_id = person.id", (rs, columnIndex) -> {
+            String title = rs.getString("title");
+            String name = rs.getString("name");
+            return new BookPersonInfo(title,name);
+        });
     }
 }

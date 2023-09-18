@@ -6,7 +6,7 @@
 </head>
 <body>
 <div th:object="${book}">
-    <p th:text="${book.getName()()}">NAME</p>
+    <p th:text="${book.getTitle()()}">NAME</p>
     <p th:text="${book.getAuthor()}">AUTHOR</p>
     <p th:text="${book.getReleaseYear()}">RELEASE YEAR</p>
 

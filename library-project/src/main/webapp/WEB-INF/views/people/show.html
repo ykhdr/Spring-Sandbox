@@ -19,7 +19,7 @@
     <th:block th:unless="${books.isEmpty()}">
         <ul>
             <li th:each="book : ${books}">
-                <span th:text="${book.getName() + ', ' + book.getAuthor()}"></span>
+                <span th:text="${book.getTitle() + ', ' + book.getAuthor()}"></span>
             </li>
         </ul>
     </th:block>
