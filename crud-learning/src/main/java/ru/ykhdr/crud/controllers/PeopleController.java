@@ -1,6 +1,7 @@
 package ru.ykhdr.crud.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,8 +11,8 @@ import ru.ykhdr.crud.services.PeopleService;
 
 import javax.validation.Valid;
 
-@RequiredArgsConstructor
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/people")
 public class PeopleController {
     private final PeopleService peopleService;
