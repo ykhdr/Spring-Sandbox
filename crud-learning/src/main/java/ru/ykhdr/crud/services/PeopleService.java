@@ -3,6 +3,7 @@ package ru.ykhdr.crud.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.ykhdr.crud.models.Mood;
 import ru.ykhdr.crud.models.Person;
 import ru.ykhdr.crud.repositories.PeopleRepository;
 
@@ -28,6 +29,7 @@ public class PeopleService {
     @Transactional
     public void save(Person person) {
         person.setCreatedAt(new Date());
+        person.setMood(Mood.HAPPY);
 
         peopleRepository.save(person);
     }

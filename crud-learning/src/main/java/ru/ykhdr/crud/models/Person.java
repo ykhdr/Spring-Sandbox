@@ -42,6 +42,9 @@ public class Person {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
+    @Enumerated(EnumType.ORDINAL)
+    private Mood mood;
+
     @OneToMany(mappedBy = "owner")
     private List<Item> items;
 }
