@@ -43,6 +43,7 @@ public class Person {
     private Date createdAt;
 
     @Enumerated(EnumType.ORDINAL)
+    @Column(name = "mood")
     private Mood mood;
 
     @OneToMany(mappedBy = "owner")
