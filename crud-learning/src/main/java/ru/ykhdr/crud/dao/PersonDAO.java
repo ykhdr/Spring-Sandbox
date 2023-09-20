@@ -15,28 +15,39 @@ import java.util.Optional;
 public class PersonDAO {
     private final SessionFactory sessionFactory;
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<Person> index() {
         Session session = sessionFactory.getCurrentSession();
 
-        return session.createQuery("select p from person p", Person.class).getResultList();
+        return session.createQuery("select p from Person p", Person.class).getResultList();
     }
 
+    @Transactional
     public Optional<Person> show(int id) {
-        return null;
+        Session session = sessionFactory.getCurrentSession();
+
+        Person person = session.get(Person.class, id);
+
+        return Optional.of(person);
     }
 
-    public Optional<Person> show(String email) {
-        return null;
-    }
-
+    @Transactional
     public void save(Person person) {
+        Session session = sessionFactory.getCurrentSession();
+        session.persist(person);
     }
 
-
+    @Transactional
     public void update(int id, Person updatedPerson) {
+        Session session = sessionFactory.getCurrentSession();
+
+        session.merge(updatedPerson);
     }
 
+    @Transactional
     public void delete(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        session.createQuery("delete Person p WHERE p.id=:id")
+                .setParameter("id", id).executeUpdate();
     }
 }

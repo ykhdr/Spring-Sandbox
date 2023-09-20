@@ -1,7 +1,10 @@
 package ru.ykhdr.crud.models;
 
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -10,7 +13,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
-@Table(name = "person")
+//@Table(name = "Person")
 public class Person {
 
     @Id
@@ -23,10 +26,4 @@ public class Person {
 
     @Column(name = "age")
     private int age;
-
-    @Column(name = "email")
-    private String email;
-
-    @Column(name = "address")
-    private String address;
 }

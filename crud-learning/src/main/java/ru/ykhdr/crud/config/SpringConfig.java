@@ -1,7 +1,6 @@
 package ru.ykhdr.crud.config;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -74,12 +73,6 @@ public class SpringConfig implements WebMvcConfigurer {
         return dataSource;
     }
 
-    // Используем Hibernate вместо JdbcTemplate
-//    @Bean
-//    public JdbcTemplate jdbcTemplate() {
-//        return new JdbcTemplate(dataSource());
-//    }
-
     private Properties hibernateProperties() {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
@@ -92,7 +85,7 @@ public class SpringConfig implements WebMvcConfigurer {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("ru.alishev.springcourse.models");
+        sessionFactory.setPackagesToScan("ru.ykhdr.crud.models");
         sessionFactory.setHibernateProperties(hibernateProperties());
 
         return sessionFactory;
