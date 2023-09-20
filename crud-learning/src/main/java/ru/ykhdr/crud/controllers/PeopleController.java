@@ -1,25 +1,27 @@
 package ru.ykhdr.crud.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.ykhdr.crud.models.Person;
+import ru.ykhdr.crud.services.ItemService;
 import ru.ykhdr.crud.services.PeopleService;
 
 import javax.validation.Valid;
 
-@Controller
 @RequiredArgsConstructor
+@Controller
 @RequestMapping("/people")
 public class PeopleController {
     private final PeopleService peopleService;
+    private final ItemService itemService;
 
     @GetMapping()
     public String index(Model model) {
         model.addAttribute("people", peopleService.findAll());
+
         return "people/index";
     }
 

@@ -1,7 +1,6 @@
 package ru.ykhdr.crud.services;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.ykhdr.crud.models.Person;
@@ -40,4 +39,5 @@ public class PeopleService {
     public void delete(int id){
         peopleRepository.deleteById(id);
     }
+
 }
