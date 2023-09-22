@@ -10,13 +10,30 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import ru.ykhdr.securityproject.services.PersonDetailsService;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
     private final PersonDetailsService personDetailsService;
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests((auth) -> auth.anyRequest().authenticated())
+                .formLogin(config -> config
+                        .loginPage("/auth/login")
+                        .loginProcessingUrl("/process_login")
+                        .defaultSuccessUrl("/hello",true)
+                        .failureUrl("/auth/login?error"))
+                .httpBasic(withDefaults());
+
+        return http.build();
+    }
 
     @Bean
     public AuthenticationManager authManager(HttpSecurity http) throws Exception {
@@ -27,7 +44,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public PasswordEncoder getPasswordEncoder(){
+    public PasswordEncoder getPasswordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
 
