@@ -7,34 +7,28 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
-import org.springframework.security.config.ldap.EmbeddedLdapServerContextSourceFactoryBean;
-import org.springframework.security.config.ldap.LdapBindAuthenticationManagerFactory;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.SecurityFilterChain;
-import ru.ykhdr.securityproject.security.AuthProviderImpl;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import ru.ykhdr.securityproject.services.PersonDetailsService;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
 @Configuration
-public class SecurityConfig{
-    private final AuthProviderImpl authProvider;
+public class SecurityConfig {
+    private final PersonDetailsService personDetailsService;
 
     @Bean
     public AuthenticationManager authManager(HttpSecurity http) throws Exception {
-        AuthenticationManagerBuilder authenticationManagerBuilder =
-                http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.authenticationProvider(authProvider);
-//        authenticationManagerBuilder.inMemoryAuthentication()
-//                .withUser("memuser")
-//                .password("pass")
-//                .roles("USER");
+        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+        authenticationManagerBuilder.userDetailsService(personDetailsService);
+
         return authenticationManagerBuilder.build();
+    }
+
+    @Bean
+    public PasswordEncoder getPasswordEncoder(){
+        return NoOpPasswordEncoder.getInstance();
     }
 
 }
