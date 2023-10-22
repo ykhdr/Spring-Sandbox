@@ -6,14 +6,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.ykhdr.securityproject.models.Person;
 
-import java.io.Serial;
 import java.util.Collection;
-import java.util.Objects;
 
+@Getter
 @RequiredArgsConstructor
 public final class PersonDetails implements UserDetails {
 
-    @Getter
     private final Person person;
 
     @Override
