@@ -34,11 +34,16 @@ public class SecurityConfig {
                         .loginProcessingUrl("/process_login")
                         .defaultSuccessUrl("/hello",true)
                         .failureUrl("/auth/login?error"))
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/auth/login"))
                 .httpBasic(withDefaults());
 
         return http.build();
     }
 
+
+    // настраиваем аутентификацию
     @Bean
     public AuthenticationManager authManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
