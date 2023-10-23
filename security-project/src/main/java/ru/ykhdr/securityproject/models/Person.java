@@ -31,4 +31,6 @@ public class Person {
     private String password;
 
 
+    @Column(name = "role")
+    private String role;
 }

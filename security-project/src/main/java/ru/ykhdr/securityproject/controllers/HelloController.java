@@ -19,7 +19,12 @@ public class HelloController {
 
         PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
 
-        System.out.println(personDetails.getPerson());
+        System.out.println(personDetails.person());
         return "hello";
+    }
+
+    @GetMapping("/admin")
+    public String adminPage(){
+        return "admin";
     }
 }

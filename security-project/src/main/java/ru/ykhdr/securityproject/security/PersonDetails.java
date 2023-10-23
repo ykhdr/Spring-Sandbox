@@ -1,22 +1,18 @@
 package ru.ykhdr.securityproject.security;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import ru.ykhdr.securityproject.models.Person;
 
 import java.util.Collection;
+import java.util.Collections;
 
-@Getter
-@RequiredArgsConstructor
-public final class PersonDetails implements UserDetails {
-
-    private final Person person;
+public record PersonDetails(Person person) implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.singletonList(new SimpleGrantedAuthority(person.getRole()));
     }
 
     @Override
